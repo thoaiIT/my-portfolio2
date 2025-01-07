@@ -1,0 +1,34 @@
+2025-01-07T04:56:50.369Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:52.182Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:52.741Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:52.947Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:53.136Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:53.320Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:53.509Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:53.688Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:53.901Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:54.059Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:54.251Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:54.436Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:54.627Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:54.812Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:55.008Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:55.194Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:55.381Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:55.571Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:55.754Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:55.947Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:56.133Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:56.332Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:56.520Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:56.720Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:56.922Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:57.129Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:56:57.350Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:57:05.102Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:57:05.273Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:57:05.458Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:57:05.657Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T04:57:05.870Z [ERROR]: GraphQL Error: User validation failed: name: Path `name` is required., email: Path `email` is required., password: Path `password` is required.
+2025-01-07T06:14:02.657Z [ERROR]: GraphQL Error: Must provide query string.
+2025-01-07T06:55:10.699Z [ERROR]: GraphQL Error: Not Authorised!
