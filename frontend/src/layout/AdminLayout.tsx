@@ -1,12 +1,12 @@
-import Sidebar from './sidebar';
+import Sidebar from './Sidebar';
 
-const AdminLayout = () => {
+const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex">
+    <div className="flex w-full h-screen">
       <div className="w-1/4">
         <Sidebar />
       </div>
-      <div className="w-3/4">Content</div>
+      <div className="w-3/4">{children}</div>
     </div>
   );
 };

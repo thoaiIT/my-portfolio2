@@ -1,18 +1,19 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { LazyAdminLayout } from '@/lib/lazyComponents';
+import useAuthStore from '@/store/auth.store';
+import { Navigate, Outlet } from 'react-router-dom';
 
-interface PrivateRouteProps {
-  children: React.ReactNode;
-}
-
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
-  const isAuthenticated = !!localStorage.getItem('authToken');
+const PrivateRoute = () => {
+  const { isAuthenticated } = useAuthStore();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
-  return <>{children}</>;
+  return (
+    <LazyAdminLayout>
+      <Outlet />
+    </LazyAdminLayout>
+  );
 };
 
 export default PrivateRoute;

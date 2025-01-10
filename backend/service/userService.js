@@ -8,14 +8,13 @@ const userService = {
   getUserByEmail: async (email) => await userRepository.findByEmail(email),
   createUser: async (userData) => await userRepository.create(userData),
   loginUser: async ({ email, password }) => {
-    console.log('loginnnnnnnn');
     const user = await userRepository.findByEmail(email);
 
     if (!user) {
       throw new CustomError('Invalid user!', 404);
     }
 
-    const isMatch = user.comparePassword(password);
+    const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
       throw new CustomError('Wrong password', 500);

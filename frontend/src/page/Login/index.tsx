@@ -1,74 +1,112 @@
-import React, { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLoginApi } from '@/apis/hooks/authApi.hook';
+import { useAuth } from '@/hooks/useAuth';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-// GraphQL Mutation
-const LOGIN_MUTATION = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
-  }
-`;
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { useForm } from 'react-hook-form';
+import { LoginSchema, LoginSchemaType } from './schemas';
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<LoginSchemaType>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const [login, { loading, error }] = useLoginApi();
+  const { login: handleLoginSuccess } = useAuth();
+  const { toast } = useToast();
 
+  const handleLogin = async (data: LoginSchemaType) => {
     try {
+      const { email, password } = data;
       const response = await login({ variables: { email, password } });
-      const token = response.data.login.token;
 
-      // Lưu token vào localStorage
-      localStorage.setItem('authToken', token);
+      if (!response.data) return;
 
-      // Chuyển hướng đến trang admin
+      const { token, user } = response.data.login;
+
+      handleLoginSuccess(user, token);
+
       navigate('/admin');
     } catch (err) {
       console.error('Login failed:', err);
     }
   };
 
+  const submitForm = (data: LoginSchemaType) => {
+    handleLogin(data);
+  };
+
+  useEffect(() => {
+    if (!error) return;
+    toast({
+      title: 'Login Error',
+      description: error.message,
+      variant: 'destructive',
+    });
+  }, [error, toast]);
+
   return (
-    <div className="h-screen flex justify-center items-center bg-gray-100">
-      <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">Admin Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
-            <input
-              type="email"
-              className="input input-bordered w-full"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              className="input input-bordered w-full"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button
-            className="btn btn-primary w-full"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </form>
-        {error && <p className="text-red-500 mt-4">{error.message}</p>}
+    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">Login</CardTitle>
+            <CardDescription>
+              Enter your email below to login to your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit(submitForm)} noValidate>
+              <div className="flex flex-col gap-6">
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    autoFocus
+                    {...register('email')}
+                    placeholder="email@example.com"
+                    error={errors.email}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    {...register('password')}
+                    error={errors.password}
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? 'Logging in...' : 'Login'}
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
