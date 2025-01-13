@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Spacegrotesk', 'sans-serif'], // Thay thế font mặc định của sans
+        sans: ['Spacegrotesk', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -55,6 +55,25 @@ export default {
         },
         neutral: {
           100: 'hsl(var(--neutral--100))',
+        },
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar-background))',
+          foreground: 'hsl(var(--sidebar-foreground))',
+          primary: 'hsl(var(--sidebar-primary))',
+          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+          accent: 'hsl(var(--sidebar-accent))',
+          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+          border: 'hsl(var(--sidebar-border))',
+          ring: 'hsl(var(--sidebar-ring))',
+        },
+        keyframes: {
+          'slide-down': {
+            '0%': { transform: 'translateY(-100%)' },
+            '100%': { transform: 'translateY(0)' },
+          },
+        },
+        animation: {
+          'slide-down': 'slide-down 0.3s ease-out',
         },
       },
     },

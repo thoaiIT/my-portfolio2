@@ -1,29 +1,18 @@
 import React, { Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import PrivateRoute from './routes/PrivateRoute';
-import { LazyLoginPage, LazyPortfolioPage } from './lib/lazyComponents';
-import Loading from './components/Loading';
+import Loading from './components/loading';
 import { ApolloProvider } from '@apollo/client';
 import client from './apollo-client';
+import AppRoutes from './routes/appRoutes';
+import { useLoadingStore } from './store/loading.store';
 
 const App: React.FC = () => {
+  const isLoading = useLoadingStore((state) => state.isLoading);
+
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading isLoading />}>
       <ApolloProvider client={client}>
-        <Routes>
-          {/* Portfolio không yêu cầu đăng nhập */}
-          <Route path="/" element={<LazyPortfolioPage />} />
-
-          {/* Trang đăng nhập */}
-          <Route path="/login" element={<LazyLoginPage />} />
-
-          {/* Admin Dashboard yêu cầu đăng nhập */}
-          <Route path="/admin" element={<PrivateRoute />}>
-            <Route index element={<div>Admin Dashboard</div>} />
-            <Route path="project" element={<div>Project</div>} />
-            <Route path="skill" element={<div>Skill</div>} />
-          </Route>
-        </Routes>
+        <Loading isLoading={isLoading} />
+        <AppRoutes />
       </ApolloProvider>
     </Suspense>
   );

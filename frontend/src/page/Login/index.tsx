@@ -17,6 +17,9 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
 import { LoginSchema, LoginSchemaType } from './schemas';
+import { useLoadingStore } from '@/store/loading.store';
+import { paths } from '@/routes/paths';
+import useAuthStore from '@/store/auth.store';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -34,8 +37,10 @@ const LoginPage: React.FC = () => {
   });
 
   const [login, { loading, error }] = useLoginApi();
+  const { isAuthenticated } = useAuthStore();
   const { login: handleLoginSuccess } = useAuth();
   const { toast } = useToast();
+  const setLoading = useLoadingStore((state) => state.setLoading);
 
   const handleLogin = async (data: LoginSchemaType) => {
     try {
@@ -48,7 +53,7 @@ const LoginPage: React.FC = () => {
 
       handleLoginSuccess(user, token);
 
-      navigate('/admin');
+      navigate(paths.admin.index);
     } catch (err) {
       console.error('Login failed:', err);
     }
@@ -67,6 +72,15 @@ const LoginPage: React.FC = () => {
     });
   }, [error, toast]);
 
+  useEffect(() => {
+    setLoading(loading);
+  }, [loading, setLoading]);
+
+  useEffect(() => {
+    if (!isAuthenticated()) return;
+    navigate(paths.admin.index);
+  }, [isAuthenticated, navigate]);
+
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
       <div className="w-full max-w-sm">
@@ -81,7 +95,9 @@ const LoginPage: React.FC = () => {
             <form onSubmit={handleSubmit(submitForm)} noValidate>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" isRequired>
+                    Email
+                  </Label>
                   <Input
                     id="email"
                     type="email"
@@ -92,11 +108,14 @@ const LoginPage: React.FC = () => {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password" isRequired>
+                    Password
+                  </Label>
                   <Input
                     id="password"
                     type="password"
                     {...register('password')}
+                    placeholder="********"
                     error={errors.password}
                   />
                 </div>

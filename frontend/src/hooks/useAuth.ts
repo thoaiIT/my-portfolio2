@@ -6,7 +6,7 @@ import { CurrentUserType } from '@/types/user';
 export const useAuth = () => {
   const { currentUser, setCurrentUser } = useAuthStore();
   const login = (user: CurrentUserType, token: string) => {
-    setUserToCache(user);
+    updateUserInfo(user);
     setAccessToken(token);
   };
 
