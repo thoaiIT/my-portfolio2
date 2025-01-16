@@ -6,7 +6,15 @@ const userService = {
   getUsers: async () => await userRepository.findAll(),
   getUserById: async (id) => await userRepository.findById(id),
   getUserByEmail: async (email) => await userRepository.findByEmail(email),
-  createUser: async (userData) => await userRepository.create(userData),
+  createUser: async (userData) => {
+    const exUser = await userRepository.findByEmail(userData.email);
+
+    if (exUser) {
+      throw new CustomError('User already exists!', 400);
+    }
+
+    return await userRepository.create(userData);
+  },
   loginUser: async ({ email, password }) => {
     const user = await userRepository.findByEmail(email);
 

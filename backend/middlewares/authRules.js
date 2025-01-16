@@ -1,6 +1,6 @@
 import { rule, shield } from 'graphql-shield';
 import jwt from 'jsonwebtoken';
-import { CustomError } from './customError.js';
+import { CustomError } from '../utils/customError.js';
 
 // Rule: Kiểm tra xác thực
 const isAuthenticated = rule()(async (parent, args, context) => {
@@ -49,6 +49,7 @@ export const permissions = shield(
     Mutation: {
       '*': isAuthenticated, // Tất cả Mutation trong userResolver cần xác thực
       login: true, // Auth resolver không cần xác thực
+      createSkill: true,
     },
   },
   {

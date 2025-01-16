@@ -1,4 +1,8 @@
-import { LazyLoginPage, LazyPortfolioPage } from '@/lib/lazyComponents';
+import {
+  LazyLoginPage,
+  LazyPortfolioPage,
+  LazySkillsPage,
+} from '@/lib/lazyComponents';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import PrivateRoute from './privateRoute';
 import { paths } from './paths';
@@ -20,7 +24,7 @@ const AppRoutes = () => {
         />
         <Route path={paths.admin.dashboard} element={<div>Dashboard</div>} />
         <Route path={paths.admin.projects} element={<div>Project</div>} />
-        <Route path={paths.admin.skills} element={<div>Skill</div>} />
+        <Route path={paths.admin.skills} element={<LazySkillsPage />} />
         <Route path={paths.admin.socials} element={<div>Skill</div>} />
         <Route path={paths.admin.about} element={<div>Skill</div>} />
       </Route>

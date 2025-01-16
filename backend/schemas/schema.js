@@ -11,6 +11,16 @@ const schema = buildSchema(`
     updated_at: String
   }
 
+  type Skill {
+    id: ID!
+    name: String!
+    icon: String!
+    level: String
+    description: String
+    created_at: String
+    updated_at: String
+  }
+  
   type AuthPayload {
     user: User
     token: String
@@ -19,6 +29,9 @@ const schema = buildSchema(`
   type Query {
     user(id: ID!): User
     users: [User]
+    skills: [Skill]
+    skill(id: ID!): Skill
+    skillByName(name: String!): Skill
   }
 
   type Mutation {
@@ -31,6 +44,23 @@ const schema = buildSchema(`
     ): User
 
     login(email: String!, password: String!): AuthPayload
+
+    createSkill(
+      name: String!
+      icon: String!
+      level: String
+      description: String
+    ): Skill
+
+    updateSkill(
+      id: ID!
+      name: String!
+      icon: String!
+      level: String
+      description: String
+    ): Skill
+
+    deleteSkill(id: ID!): Skill
   }
 `);
 

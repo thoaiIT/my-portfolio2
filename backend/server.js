@@ -7,9 +7,10 @@ import authResolver from './resolvers/authResolver.js';
 import userResolver from './resolvers/userResolver.js';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { applyMiddleware } from 'graphql-middleware';
-import { permissions } from './utils/authRules.js';
+import { permissions } from './middlewares/authRules.js';
 import cors from 'cors';
 import { CustomError } from './utils/customError.js';
+import skillResolver from './resolvers/skillResolver.js';
 
 // Load biến môi trường
 dotenv.config();
@@ -29,10 +30,12 @@ const schema = makeExecutableSchema({
   resolvers: {
     Query: {
       ...userResolver.Query, // User resolver (cần xác thực)
+      ...skillResolver.Query,
     },
     Mutation: {
       ...userResolver.Mutation, // User resolver (cần xác thực)
       ...authResolver.Mutation, // Auth resolver (không cần xác thực)
+      ...skillResolver.Mutation,
     },
   },
 });
