@@ -34,3 +34,26 @@ export const MenuItems = [
     icon: Settings2,
   },
 ];
+
+export const PortfolioMenuItems = [
+  {
+    title: 'Home',
+    url: paths.portfolio.index,
+  },
+  {
+    title: 'About',
+    url: paths.portfolio.about,
+  },
+  {
+    title: 'Work',
+    url: paths.portfolio.work,
+  },
+  {
+    title: 'Contact',
+    url: paths.portfolio.contact,
+  },
+  {
+    title: 'Lab',
+    url: paths.portfolio.lab,
+  },
+];
