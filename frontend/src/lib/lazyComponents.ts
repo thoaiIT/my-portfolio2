@@ -1,7 +1,13 @@
 import React from 'react';
 
 // Admin Layout và Pages
-export const LazyAdminLayout = React.lazy(() => import('@/layout/adminLayout'));
+export const LazyAdminLayout = React.lazy(
+  () => import('@/layout/admin/adminLayout')
+);
+
+export const LazyPortfolioLayout = React.lazy(
+  () => import('@/layout/portfolio/portfolioLayout')
+);
 
 // Portfolio và Login
 export const LazyPortfolioPage = React.lazy(() => import('@/page/portfolio'));

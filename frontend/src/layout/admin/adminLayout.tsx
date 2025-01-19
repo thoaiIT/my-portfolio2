@@ -3,9 +3,9 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import { AppSidebar } from './components/appSidebar';
 import { Separator } from '@radix-ui/react-separator';
-import BreadcrumbAdmin from './components/breadcrumbAdmin';
+import BreadcrumbAdmin from '../components/admin/breadcrumbAdmin';
+import { AppSidebar } from '../components/admin/appSidebar';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
