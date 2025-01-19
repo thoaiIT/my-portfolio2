@@ -47,7 +47,7 @@ const Menu = () => {
     <div className="menu-container" ref={container}>
       <div className="menu-bar">
         <div className="menu-logo">
-          <Link to={paths.portfolio.index}>Portfolio</Link>
+          <Link to={paths.portfolio.index}>ThoaiNguyenVan</Link>
         </div>
         <div className="menu-open" onClick={toggelMenu}>
           <p>Menu</p>
@@ -56,7 +56,7 @@ const Menu = () => {
       <div className="menu-overlay">
         <div className="menu-overlay-bar">
           <div className="menu-logo">
-            <Link to={paths.portfolio.index}>Portfolio</Link>
+            <Link to={paths.portfolio.index}>ThoaiNguyenVan</Link>
           </div>
           <div className="menu-close" onClick={toggelMenu}>
             <p>Close</p>
