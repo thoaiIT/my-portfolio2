@@ -4,12 +4,13 @@ import { FieldError } from 'react-hook-form';
 
 type InputType = React.ComponentProps<'input'> & {
   error?: FieldError;
+  wrapStyles?: string;
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputType>(
-  ({ className, error, ...props }, ref) => {
+  ({ className, error, wrapStyles, ...props }, ref) => {
     return (
-      <div>
+      <div className={wrapStyles}>
         <input
           ref={ref} // Đảm bảo ref hoạt động
           className={cn(

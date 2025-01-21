@@ -1,46 +1,60 @@
-import multer from 'multer';
+import fs from 'fs';
 import path from 'path';
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // Xác định thư mục lưu trữ dựa trên field name
-    const uploadPath = `uploads/${file.fieldname}s`; // Ví dụ: icon -> uploads/icons
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    // Tạo tên file duy nhất
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname); // Lấy đuôi file (vd: .png, .jpg)
-    cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
-  },
-});
+const uploadMiddleware = async (file, folder = 'uploads') => {
+  try {
+    if (!file) {
+      throw new Error('No file uploaded');
+    }
 
-// Lọc loại file (chỉ cho phép ảnh)
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-  if (allowedTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(
-      new Error('Invalid file type. Only JPEG, PNG, and GIF are allowed.'),
-      false
-    );
+    const resolveFile = await file;
+    const { createReadStream, filename, mimetype } = resolveFile.file;
+
+    // Kiểm tra loại file (ví dụ: chỉ chấp nhận ảnh)
+    const allowedTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'image/svg+xml',
+    ];
+    if (!allowedTypes.includes(mimetype)) {
+      throw new Error(
+        `Invalid file type: ${mimetype}. Allowed types are ${allowedTypes.join(', ')}`
+      );
+    }
+
+    // Đường dẫn lưu trữ file
+    // eslint-disable-next-line no-undef
+    const uploadDir = path.join(process.cwd(), folder);
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    const filePath = path.join(uploadDir, filename);
+
+    // Kiểm tra xem file đã tồn tại hay chưa
+    if (fs.existsSync(filePath)) {
+      throw new Error(
+        `File with name "${filename}" already exists. Please rename the file and try again.`
+      );
+    }
+
+    const stream = createReadStream();
+
+    // Lưu file
+    await new Promise((resolve, reject) => {
+      const out = fs.createWriteStream(filePath);
+      stream.pipe(out);
+      out.on('finish', resolve);
+      out.on('error', reject);
+    });
+
+    // Trả về đường dẫn URL của file
+    return `/${folder}/${filename}`;
+  } catch (error) {
+    throw new Error(`File upload failed: ${error.message}`);
   }
 };
 
-// Middleware upload
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Giới hạn kích thước file 5MB
-  fileFilter,
-});
-
-// Hàm middleware nhận tên field cần upload
-export const uploadMiddleware = (fieldName) => upload.single(fieldName);
-
-export const uploadMultipleMiddleware = (fields) =>
-  multer({
-    storage,
-    limits: { fileSize: 5 * 1024 * 1024 },
-    fileFilter,
-  }).fields(fields); // fields là mảng { name: <fieldName>, maxCount: <số lượng ảnh> }
+export default uploadMiddleware;

@@ -1,13 +1,13 @@
 import { CurrentUserType } from './user';
 
-export type LoginResponse = {
+export type LoginResponseType = {
   login: {
     token: string;
     user: CurrentUserType;
   };
 };
 
-export type LoginInput = {
+export type LoginInputType = {
   email: string;
   password: string;
 };

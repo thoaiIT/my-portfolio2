@@ -8,9 +8,11 @@ import userResolver from './resolvers/userResolver.js';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { applyMiddleware } from 'graphql-middleware';
 import { permissions } from './middlewares/authRules.js';
+import { graphqlUploadExpress } from 'graphql-upload';
 import cors from 'cors';
 import { CustomError } from './utils/customError.js';
 import skillResolver from './resolvers/skillResolver.js';
+import path from 'path';
 
 // Load biến môi trường
 dotenv.config();
@@ -21,9 +23,16 @@ connectDB();
 // Khởi tạo Express
 const app = express();
 
+app.use(graphqlUploadExpress({ maxFileSize: 5 * 1024 * 1024, maxFiles: 1 }));
+
 app.use(cors());
 
 app.use(express.json());
+
+// eslint-disable-next-line no-undef
+const uploadsPath = path.join(process.cwd(), 'uploads');
+
+app.use('/uploads', express.static(uploadsPath));
 
 const schema = makeExecutableSchema({
   typeDefs,

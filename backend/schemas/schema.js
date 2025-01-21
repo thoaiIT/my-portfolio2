@@ -1,6 +1,7 @@
 import { buildSchema } from 'graphql';
 
 const schema = buildSchema(`
+  scalar Upload
   type User {
     id: ID!
     name: String!
@@ -47,7 +48,7 @@ const schema = buildSchema(`
 
     createSkill(
       name: String!
-      icon: String!
+      icon: Upload!
       level: String
       description: String
     ): Skill
@@ -55,7 +56,7 @@ const schema = buildSchema(`
     updateSkill(
       id: ID!
       name: String!
-      icon: String!
+      icon: Upload!
       level: String
       description: String
     ): Skill

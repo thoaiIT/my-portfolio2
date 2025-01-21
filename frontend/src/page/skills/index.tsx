@@ -1,26 +1,101 @@
+import { Button } from '@/components/ui/button';
+import { SkillSchemaType } from './schemas';
 import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-  DialogHeader,
-} from '@/components/ui/dialog';
+  useCreateSkillApi,
+  useDeleteSkillApi,
+  useGetSkillsApi,
+  useUpdateSkillApi,
+} from '@/apis/hooks/skillApi.hook';
+import { useEffect, useRef } from 'react';
+import { useLoadingStore } from '@/store/loading.store';
+import SkillTable from './components/skillTable';
+import SkillDialog, { SkillDialogRefType } from './components/skillDialog';
+import toast from 'react-hot-toast';
 
 const SkillsPage: React.FC = () => {
+  const [createSkill, { loading, error }] = useCreateSkillApi();
+  const {
+    data,
+    loading: getSkillsLoading,
+    error: getSkillsError,
+    refetch,
+  } = useGetSkillsApi();
+  const [deleteSkill, { loading: deleteLoading, error: deleteError }] =
+    useDeleteSkillApi();
+
+  const dialogRef = useRef<SkillDialogRefType>(null);
+
+  const [updateSkill, { loading: updateLoading, error: updateError }] =
+    useUpdateSkillApi();
+
+  const setLoading = useLoadingStore((state) => state.setLoading);
+
+  const submitForm = async (data: SkillSchemaType) => {
+    const { name, description, icon } = data;
+
+    const response = await createSkill({
+      variables: { name, icon: icon[0], description },
+    });
+    if (!response.data) return;
+
+    toast.success('Create Skill Successfully!');
+    dialogRef.current?.closeDialog();
+    refetch();
+  };
+
+  const handleEdit = async (skill: SkillSchemaType) => {
+    const res = await updateSkill({
+      variables: {
+        id: skill.id as string,
+        name: skill.name,
+        icon: skill.icon[0],
+        description: skill.description,
+      },
+    });
+
+    if (!res.data) return;
+
+    toast.success('Update Skill Successfully!');
+    refetch();
+  };
+
+  const handleDelete = async (id: string) => {
+    const res = await deleteSkill({ variables: { id } });
+    if (!res.data) return;
+
+    toast.success('Delete Skill Successfully!');
+    refetch();
+  };
+
+  useEffect(() => {
+    setLoading(loading || getSkillsLoading || deleteLoading || updateLoading);
+  }, [loading, setLoading, getSkillsLoading, deleteLoading, updateLoading]);
+
+  useEffect(() => {
+    if (error) toast.error('Create Skill Failed!');
+
+    if (getSkillsError) toast.error('Get Skills Failed!');
+
+    if (deleteError) toast.error('Delete Skill Failed!');
+
+    if (updateError) toast.error('Update Skill Failed!');
+  }, [error, getSkillsError, deleteError, updateError]);
+
   return (
-    <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
+    <div className="flex flex-col gap-6 items-end">
+      <SkillDialog
+        trigger={<Button variant="default">Create Skill</Button>}
+        handleSubmitForm={submitForm}
+        title="Create Skill"
+        buttonLabel="Create"
+        ref={dialogRef}
+      />
+      <SkillTable
+        data={data?.skills || []}
+        handleDeleteSkill={handleDelete}
+        handleEditSkill={handleEdit}
+      />
+    </div>
   );
 };
 
