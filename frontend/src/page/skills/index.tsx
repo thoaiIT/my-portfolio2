@@ -82,7 +82,7 @@ const SkillsPage: React.FC = () => {
   }, [error, getSkillsError, deleteError, updateError]);
 
   return (
-    <div>
+    <div className="flex flex-col gap-6 items-end">
       <SkillDialog
         trigger={<Button variant="outline">Create Skill</Button>}
         handleSubmitForm={submitForm}

@@ -19,7 +19,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             <BreadcrumbAdmin />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0 mt-4">
+        <div className="flex flex-1 flex-col gap-4 p-8 pt-0 mt-4">
           {children}
         </div>
       </SidebarInset>
