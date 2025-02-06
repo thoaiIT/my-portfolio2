@@ -6,12 +6,13 @@ export const setAccessToken = (accessToken: string) => {
   PersistCache.save(ACCESS_TOKEN_KEY, JSON.stringify(accessToken));
 };
 
-export const getAccessToken = (): { accessToken: string } => {
-  let response;
+export const getAccessToken = () => {
+  let response: string;
+
   try {
     response = JSON.parse(PersistCache.read(ACCESS_TOKEN_KEY) || '');
   } catch {
-    response = { accessToken: '' };
+    response = PersistCache.read(ACCESS_TOKEN_KEY) || '';
   }
 
   return response;

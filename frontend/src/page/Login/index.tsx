@@ -14,12 +14,12 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
 import { LoginSchema, LoginSchemaType } from './schemas';
 import { useLoadingStore } from '@/store/loading.store';
 import { paths } from '@/routes/paths';
 import useAuthStore from '@/store/auth.store';
+import toast from 'react-hot-toast';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -39,7 +39,6 @@ const LoginPage: React.FC = () => {
   const [login, { loading, error }] = useLoginApi();
   const { isAuthenticated } = useAuthStore();
   const { login: handleLoginSuccess } = useAuth();
-  const { toast } = useToast();
   const setLoading = useLoadingStore((state) => state.setLoading);
 
   const handleLogin = async (data: LoginSchemaType) => {
@@ -65,12 +64,8 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (!error) return;
-    toast({
-      title: 'Login Error',
-      description: error.message,
-      variant: 'destructive',
-    });
-  }, [error, toast]);
+    toast.error(error.message);
+  }, [error]);
 
   useEffect(() => {
     setLoading(loading);
@@ -117,6 +112,7 @@ const LoginPage: React.FC = () => {
                     {...register('password')}
                     placeholder="********"
                     error={errors.password}
+                    autoComplete="true"
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>

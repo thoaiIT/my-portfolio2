@@ -13,7 +13,6 @@ import { useLocation } from 'react-router-dom';
 
 const BreadcrumbAdmin = () => {
   const location = useLocation();
-  console.log({ location, MenuItems });
 
   const getCurrentMenuName = useCallback(() => {
     const currentMenu = MenuItems.find((item) =>
