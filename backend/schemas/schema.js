@@ -21,6 +21,15 @@ const schema = buildSchema(`
     created_at: String
     updated_at: String
   }
+
+  type Social {
+    id: ID!
+    platform: String!
+    url: String!
+    icon: String!
+    created_at: String
+    updated_at: String
+  }
   
   type AuthPayload {
     user: User
@@ -33,6 +42,9 @@ const schema = buildSchema(`
     skills: [Skill]
     skill(id: ID!): Skill
     skillByName(name: String!): Skill
+    social(id: ID!): Social
+    socials: [Social]
+    socialByName(name: String!): Social
   }
 
   type Mutation {
@@ -62,6 +74,12 @@ const schema = buildSchema(`
     ): Skill
 
     deleteSkill(id: ID!): Skill
+
+    createSocial(
+      platform: String!
+      url: String!
+      icon: Upload!
+    ): Social
   }
 `);
 

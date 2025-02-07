@@ -45,11 +45,11 @@ export const permissions = shield(
     Query: {
       '*': isAuthenticated, // Tất cả Query trong userResolver cần xác thực
       // users: true,
+      socials: true,
     },
     Mutation: {
       '*': isAuthenticated, // Tất cả Mutation trong userResolver cần xác thực
       login: true, // Auth resolver không cần xác thực
-      createSkill: true,
     },
   },
   {

@@ -1,3 +1,4 @@
+import uploadMiddleware from '../middlewares/upload.js';
 import socialRepository from '../repositories/socialRepository.js';
 
 const socialSercive = {
@@ -11,7 +12,8 @@ const socialSercive = {
     return await socialRepository.findByName(name);
   },
   createSocial: async (socialData) => {
-    return await socialRepository.create(socialData);
+    const iconUrl = await uploadMiddleware(socialData.icon, 'uploads/icons');
+    return await socialRepository.create({ ...socialData, icon: iconUrl });
   },
   updateSocial: async (id, socialData) => {
     return await socialRepository.update(id, socialData);

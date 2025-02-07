@@ -13,6 +13,7 @@ import cors from 'cors';
 import { CustomError } from './utils/customError.js';
 import skillResolver from './resolvers/skillResolver.js';
 import path from 'path';
+import socialResolver from './resolvers/socialResolver.js';
 
 // Load biến môi trường
 dotenv.config();
@@ -38,13 +39,15 @@ const schema = makeExecutableSchema({
   typeDefs,
   resolvers: {
     Query: {
-      ...userResolver.Query, // User resolver (cần xác thực)
+      ...userResolver.Query,
       ...skillResolver.Query,
+      ...socialResolver.Query,
     },
     Mutation: {
-      ...userResolver.Mutation, // User resolver (cần xác thực)
-      ...authResolver.Mutation, // Auth resolver (không cần xác thực)
+      ...userResolver.Mutation,
+      ...authResolver.Mutation,
       ...skillResolver.Mutation,
+      ...socialResolver.Mutation,
     },
   },
 });

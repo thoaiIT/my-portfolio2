@@ -3,19 +3,15 @@ import { ACCESS_TOKEN_KEY } from '@/constants/auth';
 import PersistCache from '.';
 
 export const setAccessToken = (accessToken: string) => {
-  PersistCache.save(ACCESS_TOKEN_KEY, JSON.stringify(accessToken));
+  if (accessToken) {
+    PersistCache.save(ACCESS_TOKEN_KEY, accessToken);
+  }
 };
 
-export const getAccessToken = () => {
-  let response: string;
-
-  try {
-    response = JSON.parse(PersistCache.read(ACCESS_TOKEN_KEY) || '');
-  } catch {
-    response = PersistCache.read(ACCESS_TOKEN_KEY) || '';
-  }
-
-  return response;
+export const getAccessToken = (): string | null => {
+  const token = PersistCache.read(ACCESS_TOKEN_KEY);
+  console.log({ token });
+  return token || null;
 };
 
 export const clearAccessToken = (): void => {

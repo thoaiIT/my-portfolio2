@@ -23,12 +23,11 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         err.message.includes('Unauthorized')
       ) {
         toast.error('Token expired or invalid. Logging out...');
+        clearUserFromCache();
+        clearAccessToken();
       }
     }
   }
-
-  clearUserFromCache();
-  clearAccessToken();
 
   if (networkError) {
     toast.error(`[Network error]: ${networkError}`);
