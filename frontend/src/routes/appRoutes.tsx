@@ -1,6 +1,11 @@
 import {
+  LazyHomePage,
+  LazyWorkPage,
+  LazyAboutPage,
+  LazyContactPage,
+  LazyPortfolioSkillsPage,
+  LazyLabPage,
   LazyLoginPage,
-  LazyPortfolioPage,
   LazySkillsPage,
 } from '@/lib/lazyComponents';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -13,11 +18,12 @@ const AppRoutes = () => {
     <Routes>
       {/* Portfolio không yêu cầu đăng nhập */}
       <Route path={paths.index} element={<PublicRoute />}>
-        <Route index element={<LazyPortfolioPage />} />
-        <Route path={paths.portfolio.about} element={<div>About</div>} />
-        <Route path={paths.portfolio.work} element={<div>Work</div>} />
-        <Route path={paths.portfolio.contact} element={<div>Contact</div>} />
-        <Route path={paths.portfolio.lab} element={<div>Lab</div>} />
+        <Route index element={<LazyHomePage />} />
+        <Route path={paths.portfolio.about} element={<LazyAboutPage />} />
+        <Route path={paths.portfolio.work} element={<LazyWorkPage />} />
+        <Route path="/skills" element={<LazyPortfolioSkillsPage />} />
+        <Route path={paths.portfolio.contact} element={<LazyContactPage />} />
+        <Route path={paths.portfolio.lab} element={<LazyLabPage />} />
       </Route>
 
       {/* Trang đăng nhập */}

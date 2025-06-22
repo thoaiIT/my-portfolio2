@@ -95,4 +95,95 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+    position: relative;
+  }
+}
+
+@layer components {
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgb(0 0 0 / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(0 0 0 / 0.1) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+  }
+
+  /* Split text animation styles */
+  .word-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+
+  .word {
+    display: inline-block;
+  }
+
+  /* Character animation styles */
+  .char-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+
+  .char {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  /* Menu link styles */
+  .menu-link-wrapper {
+    perspective: 1000px;
+  }
+
+  .menu-link {
+    transform-style: preserve-3d;
+  }
+
+  .menu-link-text span {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  /* Hide default cursor on desktop */
+  @media (min-width: 768px) {
+    * {
+      cursor: none !important;
+    }
+  }
+
+  /* Custom cursor styles */
+  .custom-cursor,
+  .custom-cursor-follower {
+    transition: opacity 0.3s ease;
+  }
+
+  @media (max-width: 767px) {
+    .custom-cursor,
+    .custom-cursor-follower {
+      display: none;
+    }
+  }
 }
