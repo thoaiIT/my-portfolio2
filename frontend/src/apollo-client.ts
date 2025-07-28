@@ -1,9 +1,10 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { clearAccessToken, getAccessToken } from './lib/persistCache/token';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { onError } from '@apollo/client/link/error';
 import toast from 'react-hot-toast';
 import { clearUserFromCache } from './lib/persistCache/auth';
+import { useLoadingStore } from './store/loading.store';
 
 // `uploadLink` is a terminating link
 const uploadLink = createUploadLink({
@@ -25,6 +26,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
         toast.error('Token expired or invalid. Logging out...');
         clearUserFromCache();
         clearAccessToken();
+      } else {
+        toast.error(err.message);
       }
     }
   }
@@ -34,8 +37,28 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 });
 
+let activeRequests = 0;
+
+const loadingLink = new ApolloLink((operation, forward) => {
+  activeRequests++;
+
+  if (activeRequests === 1) {
+    useLoadingStore.getState().setLoading(true);
+  }
+
+  return forward(operation).map((result) => {
+    activeRequests--;
+
+    if (activeRequests === 0) {
+      useLoadingStore.getState().setLoading(false);
+    }
+
+    return result;
+  });
+});
+
 const client = new ApolloClient({
-  link: errorLink.concat(uploadLink),
+  link: ApolloLink.from([loadingLink, errorLink, uploadLink]),
   cache: new InMemoryCache({
     resultCaching: true,
   }),

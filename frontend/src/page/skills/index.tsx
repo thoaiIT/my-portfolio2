@@ -6,29 +6,19 @@ import {
   useGetSkillsApi,
   useUpdateSkillApi,
 } from '@/apis/hooks/skillApi.hook';
-import { useEffect, useRef } from 'react';
-import { useLoadingStore } from '@/store/loading.store';
+import { useRef } from 'react';
 import SkillTable from './components/skillTable';
 import SkillDialog, { SkillDialogRefType } from './components/skillDialog';
 import toast from 'react-hot-toast';
 
 const SkillsPage: React.FC = () => {
-  const [createSkill, { loading, error }] = useCreateSkillApi();
-  const {
-    data,
-    loading: getSkillsLoading,
-    error: getSkillsError,
-    refetch,
-  } = useGetSkillsApi();
-  const [deleteSkill, { loading: deleteLoading, error: deleteError }] =
-    useDeleteSkillApi();
+  const [createSkill] = useCreateSkillApi();
+  const { data, refetch } = useGetSkillsApi();
+  const [deleteSkill] = useDeleteSkillApi();
 
   const dialogRef = useRef<SkillDialogRefType>(null);
 
-  const [updateSkill, { loading: updateLoading, error: updateError }] =
-    useUpdateSkillApi();
-
-  const setLoading = useLoadingStore((state) => state.setLoading);
+  const [updateSkill] = useUpdateSkillApi();
 
   const submitForm = async (data: SkillSchemaType) => {
     const { name, description, icon } = data;
@@ -66,20 +56,6 @@ const SkillsPage: React.FC = () => {
     toast.success('Delete Skill Successfully!');
     refetch();
   };
-
-  useEffect(() => {
-    setLoading(loading || getSkillsLoading || deleteLoading || updateLoading);
-  }, [loading, setLoading, getSkillsLoading, deleteLoading, updateLoading]);
-
-  useEffect(() => {
-    if (error) toast.error('Create Skill Failed!');
-
-    if (getSkillsError) toast.error('Get Skills Failed!');
-
-    if (deleteError) toast.error('Delete Skill Failed!');
-
-    if (updateError) toast.error('Update Skill Failed!');
-  }, [error, getSkillsError, deleteError, updateError]);
 
   return (
     <div className="flex flex-col gap-6 items-end">

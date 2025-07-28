@@ -24,3 +24,27 @@ export type SocialType = {
 export type GetSocialsResponseType = {
   socials: SocialType[];
 };
+
+export type UpdateSocialResponseType = {
+  updateSocial: {
+    id: string;
+    platform: string;
+    icon: string;
+    url: string;
+  };
+};
+
+export type UpdateSocialInputType = {
+  id: string;
+  platform: string;
+  icon?: File;
+  url?: string;
+};
+
+export type DeleteSocialResponseType = {
+  deleteSocial: { id: string };
+};
+
+export type DeleteSocialInputType = {
+  id: string;
+};

@@ -51,7 +51,7 @@ const uploadMiddleware = async (file, folder = 'uploads') => {
     });
 
     // Trả về đường dẫn URL của file
-    return `/${folder}/${filename}`;
+    return `${folder}/${filename}`;
   } catch (error) {
     throw new Error(`File upload failed: ${error.message}`);
   }

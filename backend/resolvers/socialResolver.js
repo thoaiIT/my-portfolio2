@@ -20,6 +20,12 @@ const socialResolver = {
         icon,
       });
     },
+    updateSocial: async (_, socialData) => {
+      return await socialSercive.updateSocial(socialData.id, socialData);
+    },
+    deleteSocial: async (_, { id }) => {
+      return await socialSercive.deleteSocial(id);
+    },
   },
 };
 export default socialResolver;

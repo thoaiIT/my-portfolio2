@@ -77,9 +77,18 @@ const schema = buildSchema(`
 
     createSocial(
       platform: String!
-      url: String!
+      url: String
       icon: Upload!
     ): Social
+
+    updateSocial(
+      id: ID!
+      platform: String!
+      url: String
+      icon: Upload!
+    ): Social
+
+    deleteSocial(id: ID!): Social
   }
 `);
 

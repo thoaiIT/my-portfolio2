@@ -1,38 +1,38 @@
+import { SocialType } from '@/types/social';
+import { SocialSchemaType } from '../schemas';
 import { useCallback, useMemo, useRef } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
-import CommonTable from '@/components/table';
-import { SkillType } from '@/types/skill';
 import { getFullImageUrl } from '@/lib/utils';
+import SocialDialog, { SocialDialogRefType } from './socialDialog';
 import { Button } from '@/components/ui/button';
 import { SquarePen, Trash2 } from 'lucide-react';
-import SkillDialog, { SkillDialogRefType } from './skillDialog';
-import { SkillSchemaType } from '../schemas';
+import CommonTable from '@/components/table';
 
-type SkillTableType = {
-  data: SkillType[];
-  handleEditSkill: (skill: SkillSchemaType) => void;
-  handleDeleteSkill: (id: string) => void;
+type SocialTableType = {
+  data: SocialType[];
+  handleEditSocial: (social: SocialSchemaType) => void;
+  handleDeleteSocial: (id: string) => void;
 };
 
-const SkillTable = ({
+const SocialTable = ({
   data,
-  handleEditSkill,
-  handleDeleteSkill,
-}: SkillTableType) => {
-  const dialogRef = useRef<SkillDialogRefType>(null);
+  handleEditSocial,
+  handleDeleteSocial,
+}: SocialTableType) => {
+  const dialogRef = useRef<SocialDialogRefType>(null);
 
   const handleEdit = useCallback(
-    (skill: SkillSchemaType) => {
+    (social: SocialSchemaType) => {
       dialogRef.current?.closeDialog();
-      handleEditSkill(skill);
+      handleEditSocial(social);
     },
-    [handleEditSkill]
+    [handleEditSocial]
   );
 
-  const columns: ColumnDef<SkillType>[] = useMemo(
+  const columns: ColumnDef<SocialType>[] = useMemo(
     () => [
       {
-        id: 'no',
+        id: 'no', // Đặt `id` để định danh cột
         header: 'No.',
         cell: ({ row }) => <span>{row.index + 1}</span>,
       },
@@ -48,24 +48,25 @@ const SkillTable = ({
         ),
       },
       {
-        accessorKey: 'name',
-        header: 'Name',
+        accessorKey: 'platform',
+        header: 'Platform',
         cell: ({ getValue }) => <span>{getValue() as string}</span>,
       },
       {
-        accessorKey: 'description',
-        header: 'Description',
+        accessorKey: 'url',
+        header: 'URL',
         cell: ({ getValue }) => <span>{getValue() as string}</span>,
       },
       {
         id: 'actions',
         header: 'Actions',
         cell: ({ row }) => {
-          const skill = row.original;
+          const social = row.original;
 
           return (
             <div className="flex gap-2">
-              <SkillDialog
+              {/* Nút Edit */}
+              <SocialDialog
                 trigger={
                   <Button
                     className="text-blue-500 hover:scale-105"
@@ -75,16 +76,17 @@ const SkillTable = ({
                   </Button>
                 }
                 handleSubmitForm={handleEdit}
-                defaultValues={skill}
-                title="Edit Skill"
+                defaultValues={social}
+                title="Edit Social"
                 buttonLabel="Edit"
                 ref={dialogRef}
               />
 
+              {/* Nút Delete */}
               <Button
                 className="text-white hover:scale-105"
                 variant="destructive"
-                onClick={() => handleDeleteSkill(skill.id)}
+                onClick={() => handleDeleteSocial(social.id)}
               >
                 <Trash2 />
               </Button>
@@ -93,10 +95,9 @@ const SkillTable = ({
         },
       },
     ],
-    [handleDeleteSkill, handleEdit]
+    [handleDeleteSocial, handleEdit]
   );
-
   return <CommonTable data={data} columns={columns} />;
 };
 
-export default SkillTable;
+export default SocialTable;

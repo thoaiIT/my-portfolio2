@@ -1,3 +1,4 @@
+import { FOLDER } from '../constants/store.js';
 import removeFileMiddleware from '../middlewares/removeFile.js';
 import uploadMiddleware from '../middlewares/upload.js';
 import skillRepository from '../repositories/skillRepository.js';
@@ -14,7 +15,7 @@ const skillSercive = {
     return await skillRepository.findByName(name);
   },
   createSkill: async (skillData) => {
-    const iconUrl = await uploadMiddleware(skillData.icon, 'uploads/icons');
+    const iconUrl = await uploadMiddleware(skillData.icon, FOLDER.ICON);
 
     return await skillRepository.create({ ...skillData, icon: iconUrl });
   },
@@ -27,9 +28,7 @@ const skillSercive = {
     let newIconUrl = skill.icon;
 
     if (typeof icon === 'object') {
-      // Upload icon mới và lấy đường dẫn URL
-      newIconUrl = await uploadMiddleware(icon, 'uploads/icons');
-      // Xóa icon cũ nếu tồn tại
+      newIconUrl = await uploadMiddleware(icon, FOLDER.ICON);
       if (skill.icon && newIconUrl !== skill.icon) {
         removeFileMiddleware(skill.icon);
       }
