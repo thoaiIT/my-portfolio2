@@ -1,7 +1,4 @@
-import uploadMiddleware from '../middlewares/upload.js';
 import skillSercive from '../service/skillService.js';
-import { CustomError } from '../utils/customError.js';
-import removeFileMiddleware from '../middlewares/removeFile.js';
 
 const skillResolver = {
   Query: {
@@ -17,50 +14,17 @@ const skillResolver = {
   },
   Mutation: {
     createSkill: async (_, { name, icon, level, description }) => {
-      const iconUrl = await uploadMiddleware(icon, 'uploads/icons');
       return await skillSercive.createSkill({
         name,
-        icon: iconUrl,
+        icon,
         level,
         description,
       });
     },
-    updateSkill: async (_, { id, name, icon, level, description }) => {
-      const skill = await skillSercive.getSkillById(id);
-      if (!skill) {
-        throw new CustomError('Skill not found', 404);
-      }
-      let newIconUrl = skill.icon;
-
-      if (typeof icon === 'object') {
-        // Upload icon mới và lấy đường dẫn URL
-        newIconUrl = await uploadMiddleware(icon, 'uploads/icons');
-        // Xóa icon cũ nếu tồn tại
-        if (skill.icon && newIconUrl !== skill.icon) {
-          removeFileMiddleware(skill.icon);
-        }
-      }
-
-      skill.name = name || skill.name;
-      skill.description = description || skill.description;
-      skill.level = level || skill.level;
-      skill.icon = newIconUrl;
-      return await skillSercive.updateSkill(id, {
-        ...skill,
-      });
+    updateSkill: async (_, skillData) => {
+      return await skillSercive.updateSkill(skillData.id, skillData);
     },
     deleteSkill: async (_, { id }) => {
-      const skill = await skillSercive.getSkillById(id);
-      if (!skill) {
-        throw new CustomError('Skill not found', 404);
-      }
-
-      const iconUrl = skill.icon;
-
-      if (iconUrl) {
-        removeFileMiddleware(iconUrl);
-      }
-
       return await skillSercive.deleteSkill(id);
     },
   },

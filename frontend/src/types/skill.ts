@@ -28,7 +28,6 @@ export type GetSkillsResponseType = {
 export type DeleteSkillResponseType = {
   deleteSkill: {
     id: string;
-    name: string;
   };
 };
 

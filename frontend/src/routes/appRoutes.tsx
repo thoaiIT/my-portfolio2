@@ -2,6 +2,7 @@ import {
   LazyLoginPage,
   LazyPortfolioPage,
   LazySkillsPage,
+  LazySocialsPage,
 } from '@/lib/lazyComponents';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { paths } from './paths';
@@ -32,7 +33,7 @@ const AppRoutes = () => {
         <Route path={paths.admin.dashboard} element={<div>Dashboard</div>} />
         <Route path={paths.admin.projects} element={<div>Project</div>} />
         <Route path={paths.admin.skills} element={<LazySkillsPage />} />
-        <Route path={paths.admin.socials} element={<div>Skill</div>} />
+        <Route path={paths.admin.socials} element={<LazySocialsPage />} />
         <Route path={paths.admin.about} element={<div>Skill</div>} />
       </Route>
     </Routes>

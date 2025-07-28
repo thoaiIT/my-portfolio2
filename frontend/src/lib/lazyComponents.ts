@@ -14,3 +14,4 @@ export const LazyPortfolioPage = React.lazy(() => import('@/page/portfolio'));
 export const LazyLoginPage = React.lazy(() => import('@/page/login'));
 // Skills Page
 export const LazySkillsPage = React.lazy(() => import('@/page/skills'));
+export const LazySocialsPage = React.lazy(() => import('@/page/socials'));
