@@ -1,29 +1,29 @@
-import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 interface LoadingAnimationProps {
-  onComplete?: () => void
+  onComplete?: () => void;
 }
 
 const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ onComplete }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const progressRef = useRef<HTMLDivElement>(null)
-  const textRef = useRef<HTMLDivElement>(null)
-  const counterRef = useRef<HTMLSpanElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const container = containerRef.current
-    const progress = progressRef.current
-    const text = textRef.current
-    const counter = counterRef.current
-    
-    if (!container || !progress || !text || !counter) return
+    const container = containerRef.current;
+    const progress = progressRef.current;
+    const text = textRef.current;
+    const counter = counterRef.current;
+
+    if (!container || !progress || !text || !counter) return;
 
     // Initial setup
-    gsap.set(container, { opacity: 1 })
-    gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' })
-    gsap.set(text, { opacity: 0, y: 20 })
-    
+    gsap.set(container, { opacity: 1 });
+    gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
+    gsap.set(text, { opacity: 0, y: 20 });
+
     // Create loading timeline
     const tl = gsap.timeline({
       onComplete: () => {
@@ -33,38 +33,41 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ onComplete }) => {
           duration: 0.6,
           ease: 'power2.inOut',
           onComplete: () => {
-            if (onComplete) onComplete()
+            if (onComplete) onComplete();
             if (container.parentNode) {
-              container.parentNode.removeChild(container)
+              container.parentNode.removeChild(container);
             }
-          }
-        })
-      }
-    })
+          },
+        });
+      },
+    });
 
     // Animate text in
     tl.to(text, {
       opacity: 1,
       y: 0,
       duration: 0.6,
-      ease: 'power2.out'
-    })
+      ease: 'power2.out',
+    });
 
     // Animate progress bar and counter
-    let counterObj = { value: 0 }
+    const counterObj = { value: 0 };
     tl.to(progress, {
       scaleX: 1,
       duration: 2,
-      ease: 'power2.inOut'
-    })
-    .to(counterObj, {
-      value: 100,
-      duration: 2,
       ease: 'power2.inOut',
-      onUpdate: () => {
-        counter.textContent = Math.round(counterObj.value) + '%'
-      }
-    }, '<')
+    }).to(
+      counterObj,
+      {
+        value: 100,
+        duration: 2,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          counter.textContent = Math.round(counterObj.value) + '%';
+        },
+      },
+      '<'
+    );
 
     // Add subtle floating animation to text
     gsap.to(text, {
@@ -72,17 +75,17 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ onComplete }) => {
       duration: 2,
       repeat: -1,
       yoyo: true,
-      ease: 'sine.inOut'
-    })
+      ease: 'sine.inOut',
+    });
 
     return () => {
-      tl.kill()
-      gsap.killTweensOf([container, progress, text, counterObj])
-    }
-  }, [onComplete])
+      tl.kill();
+      gsap.killTweensOf([container, progress, text, counterObj]);
+    };
+  }, [onComplete]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="fixed inset-0 z-50 bg-black flex items-center justify-center"
       style={{ pointerEvents: 'all' }}
@@ -96,16 +99,16 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ onComplete }) => {
             <span ref={counterRef}>0%</span>
           </p>
         </div>
-        
+
         <div className="relative h-[2px] bg-gray-800 rounded-full overflow-hidden">
-          <div 
+          <div
             ref={progressRef}
             className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-400 rounded-full"
           />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoadingAnimation
+export default LoadingAnimation;

@@ -1,5 +1,12 @@
-import { motion } from 'framer-motion'
-import { Code2, Database, Globe, Palette, Server, Smartphone } from 'lucide-react'
+import { motion } from 'framer-motion';
+import {
+  Code2,
+  Database,
+  Globe,
+  Palette,
+  Server,
+  Smartphone,
+} from 'lucide-react';
 
 const skills = [
   {
@@ -62,7 +69,7 @@ const skills = [
       { name: 'CI/CD', level: 80 },
     ],
   },
-]
+];
 
 const PortfolioSkillsPage = () => {
   return (
@@ -79,8 +86,8 @@ const PortfolioSkillsPage = () => {
             Skills & Expertise
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl">
-            A comprehensive overview of my technical skills and proficiencies across 
-            various domains of software development and design.
+            A comprehensive overview of my technical skills and proficiencies
+            across various domains of software development and design.
           </p>
         </motion.div>
 
@@ -113,7 +120,9 @@ const PortfolioSkillsPage = () => {
                   >
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-gray-300">{skill.name}</span>
-                      <span className="text-sm text-gray-500">{skill.level}%</span>
+                      <span className="text-sm text-gray-500">
+                        {skill.level}%
+                      </span>
                     </div>
                     <div className="relative h-2 bg-gray-800 rounded-full overflow-hidden">
                       <motion.div
@@ -154,7 +163,7 @@ const PortfolioSkillsPage = () => {
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PortfolioSkillsPage
+export default PortfolioSkillsPage;

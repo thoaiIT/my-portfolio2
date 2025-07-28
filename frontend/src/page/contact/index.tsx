@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion'
-import { Mail, MapPin, Phone, Send } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { useState } from 'react'
+import { motion } from 'framer-motion';
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useState } from 'react';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -11,17 +11,19 @@ const ContactPage = () => {
     email: '',
     subject: '',
     message: '',
-  })
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission here
-    console.log('Form submitted:', formData)
-  }
+    console.log('Form submitted:', formData);
+  };
 
   return (
     <div className="min-h-screen py-24 px-4">
@@ -37,7 +39,7 @@ const ContactPage = () => {
             Let's Work Together
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? I'd love to hear about it. Send me a message 
+            Have a project in mind? I'd love to hear about it. Send me a message
             and let's create something amazing together.
           </p>
         </motion.div>
@@ -51,7 +53,7 @@ const ContactPage = () => {
             className="lg:col-span-1"
           >
             <h2 className="text-2xl font-bold mb-8">Get in Touch</h2>
-            
+
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -59,8 +61,8 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <a 
-                    href="mailto:hello@example.com" 
+                  <a
+                    href="mailto:hello@example.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     hello@example.com
@@ -74,8 +76,8 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">Phone</h3>
-                  <a 
-                    href="tel:+1234567890" 
+                  <a
+                    href="tel:+1234567890"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     +1 (234) 567-890
@@ -90,7 +92,8 @@ const ContactPage = () => {
                 <div>
                   <h3 className="font-semibold mb-1">Location</h3>
                   <p className="text-muted-foreground">
-                    San Francisco, CA<br />
+                    San Francisco, CA
+                    <br />
                     United States
                   </p>
                 </div>
@@ -193,14 +196,14 @@ const ContactPage = () => {
             Available for Freelance Projects
           </h3>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            I'm currently accepting new projects and would love to hear about your ideas. 
-            Whether it's a small task or a large-scale application, I'm here to help bring 
-            your vision to life.
+            I'm currently accepting new projects and would love to hear about
+            your ideas. Whether it's a small task or a large-scale application,
+            I'm here to help bring your vision to life.
           </p>
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ContactPage
+export default ContactPage;

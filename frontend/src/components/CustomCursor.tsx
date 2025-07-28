@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import gsap from 'gsap'
+import useFluidCursor from '@/hooks/useFluidCursor'
 
 const CustomCursor = () => {
   const cursorDotRef = useRef<HTMLDivElement>(null)
@@ -148,6 +149,10 @@ const CustomCursor = () => {
     }
   }, [])
 
+  useEffect(() => {
+    useFluidCursor();
+  }, []);
+
   if (typeof document === 'undefined') return null
 
   return createPortal(
@@ -192,6 +197,9 @@ const CustomCursor = () => {
           top: 0
         }}
       />
+      <div className='fixed top-0 left-0 z-2 pointer-events-none'>
+        <canvas id='fluid' className='w-screen h-screen' />
+      </div>
     </>,
     document.body
   )

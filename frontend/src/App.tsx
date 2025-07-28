@@ -39,11 +39,16 @@ const App: React.FC = () => {
 
   return (
     <>
-      <CreativeLoader 
-        isLoading={isInitialLoad} 
+      <CreativeLoader
+        isLoading={isInitialLoad}
         onComplete={handleLoadingComplete}
       />
-      <div style={{ opacity: showContent ? 1 : 0, transition: 'opacity 0.6s ease' }}>
+      <div
+        style={{
+          opacity: showContent ? 1 : 0,
+          transition: 'opacity 0.6s ease',
+        }}
+      >
         <Suspense fallback={<Loading isLoading />}>
           <Loading isLoading={isLoading} />
           <PageTransition key={location.pathname}>

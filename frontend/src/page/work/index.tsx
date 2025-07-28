@@ -1,13 +1,14 @@
-import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const projects = [
   {
     id: 1,
     title: 'E-Commerce Platform',
     category: 'Web Development',
-    description: 'A modern e-commerce solution with real-time inventory management',
+    description:
+      'A modern e-commerce solution with real-time inventory management',
     technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     image: null,
     link: '#',
@@ -39,7 +40,7 @@ const projects = [
     image: null,
     link: '#',
   },
-]
+];
 
 const WorkPage = () => {
   return (
@@ -56,9 +57,9 @@ const WorkPage = () => {
             Selected Works
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A collection of projects that showcase my expertise in web development, 
-            design, and problem-solving. Each project represents a unique challenge 
-            and innovative solution.
+            A collection of projects that showcase my expertise in web
+            development, design, and problem-solving. Each project represents a
+            unique challenge and innovative solution.
           </p>
         </motion.div>
 
@@ -124,9 +125,7 @@ const WorkPage = () => {
           viewport={{ once: true }}
           className="mt-24 text-center"
         >
-          <h3 className="text-2xl font-bold mb-4">
-            Have a project in mind?
-          </h3>
+          <h3 className="text-2xl font-bold mb-4">Have a project in mind?</h3>
           <p className="text-muted-foreground mb-8">
             Let's work together to bring your ideas to life
           </p>
@@ -138,7 +137,7 @@ const WorkPage = () => {
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default WorkPage
+export default WorkPage;

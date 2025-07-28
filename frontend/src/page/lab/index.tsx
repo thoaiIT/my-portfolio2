@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
-import { ArrowUpRight, Beaker, Code, Sparkles } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion';
+import { ArrowUpRight, Beaker, Code, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const experiments = [
   {
@@ -45,21 +45,21 @@ const experiments = [
     status: 'beta',
     link: '#',
   },
-]
+];
 
 const LabPage = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'live':
-        return 'bg-green-500/10 text-green-400 border-green-500/20'
+        return 'bg-green-500/10 text-green-400 border-green-500/20';
       case 'beta':
-        return 'bg-orange-500/10 text-orange-400 border-orange-500/20'
+        return 'bg-orange-500/10 text-orange-400 border-orange-500/20';
       case 'development':
-        return 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+        return 'bg-blue-500/10 text-blue-400 border-blue-500/20';
       default:
-        return 'bg-gray-500/10 text-gray-400 border-gray-500/20'
+        return 'bg-gray-500/10 text-gray-400 border-gray-500/20';
     }
-  }
+  };
 
   return (
     <div className="bg-black text-white min-h-screen py-24 px-6 md:px-12 lg:px-24">
@@ -75,13 +75,12 @@ const LabPage = () => {
             <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center">
               <Beaker className="w-6 h-6 text-orange-400" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold">
-              The Lab
-            </h1>
+            <h1 className="text-4xl md:text-6xl font-bold">The Lab</h1>
           </div>
           <p className="text-xl text-gray-400 max-w-3xl">
-            A playground for creative experiments, cutting-edge technologies, and wild ideas. 
-            This is where I push boundaries and explore the future of web experiences.
+            A playground for creative experiments, cutting-edge technologies,
+            and wild ideas. This is where I push boundaries and explore the
+            future of web experiences.
           </p>
         </motion.div>
 
@@ -94,11 +93,14 @@ const LabPage = () => {
         >
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="w-5 h-5 text-orange-400" />
-            <span className="text-sm text-orange-400 font-medium">Featured Experiment</span>
+            <span className="text-sm text-orange-400 font-medium">
+              Featured Experiment
+            </span>
           </div>
           <h2 className="text-3xl font-bold mb-4">Neural Network Visualizer</h2>
           <p className="text-gray-400 mb-6">
-            An interactive visualization of how neural networks learn and make decisions in real-time.
+            An interactive visualization of how neural networks learn and make
+            decisions in real-time.
           </p>
           <Link
             to="#"
@@ -121,7 +123,9 @@ const LabPage = () => {
             >
               <div className="flex justify-between items-start mb-4">
                 <Code className="w-5 h-5 text-gray-600" />
-                <span className={`text-xs px-2 py-1 rounded-full border ${getStatusColor(experiment.status)}`}>
+                <span
+                  className={`text-xs px-2 py-1 rounded-full border ${getStatusColor(experiment.status)}`}
+                >
                   {experiment.status}
                 </span>
               </div>
@@ -166,8 +170,8 @@ const LabPage = () => {
             Have an idea for an experiment?
           </h2>
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            I'm always looking for new technologies to explore and creative challenges to tackle. 
-            Let's collaborate on something innovative.
+            I'm always looking for new technologies to explore and creative
+            challenges to tackle. Let's collaborate on something innovative.
           </p>
           <Link
             to="/contact"
@@ -178,7 +182,7 @@ const LabPage = () => {
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LabPage
+export default LabPage;

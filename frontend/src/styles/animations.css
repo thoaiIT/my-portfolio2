@@ -91,6 +91,6 @@ body {
 }
 
 /* Clean up will-change after animation */
-[data-scroll-revealed="true"] {
+[data-scroll-revealed='true'] {
   will-change: auto;
 }

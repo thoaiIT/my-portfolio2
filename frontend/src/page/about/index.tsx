@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import { Code2, Palette, Rocket, Users } from 'lucide-react'
+import { motion } from 'framer-motion';
+import { Code2, Palette, Rocket, Users } from 'lucide-react';
 
 const skills = [
   {
@@ -14,18 +14,20 @@ const skills = [
     category: 'Tools',
     items: ['Git', 'Docker', 'AWS', 'Figma', 'VS Code'],
   },
-]
+];
 
 const values = [
   {
     icon: Code2,
     title: 'Clean Code',
-    description: 'Writing maintainable, scalable, and efficient code is my priority.',
+    description:
+      'Writing maintainable, scalable, and efficient code is my priority.',
   },
   {
     icon: Palette,
     title: 'Design Thinking',
-    description: 'Combining aesthetics with functionality for optimal user experience.',
+    description:
+      'Combining aesthetics with functionality for optimal user experience.',
   },
   {
     icon: Rocket,
@@ -37,7 +39,7 @@ const values = [
     title: 'Collaboration',
     description: 'Working effectively with teams to achieve common goals.',
   },
-]
+];
 
 const AboutPage = () => {
   return (
@@ -50,22 +52,22 @@ const AboutPage = () => {
           transition={{ duration: 0.6 }}
           className="mb-24"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            About Me
-          </h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">About Me</h1>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <p className="text-lg text-muted-foreground mb-6">
-                I'm a passionate full-stack developer with a keen eye for design and a love 
-                for creating digital experiences that make a difference. With over 5 years 
-                of experience in web development, I specialize in building modern, performant 
-                applications that solve real-world problems.
+                I'm a passionate full-stack developer with a keen eye for design
+                and a love for creating digital experiences that make a
+                difference. With over 5 years of experience in web development,
+                I specialize in building modern, performant applications that
+                solve real-world problems.
               </p>
               <p className="text-lg text-muted-foreground">
-                My journey began with a curiosity about how things work on the web, and has 
-                evolved into a career focused on pushing the boundaries of what's possible 
-                in digital innovation. I believe in continuous learning and staying at the 
-                forefront of technology trends.
+                My journey began with a curiosity about how things work on the
+                web, and has evolved into a career focused on pushing the
+                boundaries of what's possible in digital innovation. I believe
+                in continuous learning and staying at the forefront of
+                technology trends.
               </p>
             </div>
             <div className="relative aspect-square bg-muted rounded-lg overflow-hidden">
@@ -96,7 +98,9 @@ const AboutPage = () => {
                 viewport={{ once: true }}
                 className="bg-muted/50 rounded-lg p-6"
               >
-                <h3 className="text-xl font-semibold mb-4">{skillGroup.category}</h3>
+                <h3 className="text-xl font-semibold mb-4">
+                  {skillGroup.category}
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {skillGroup.items.map((skill) => (
                     <span
@@ -159,19 +163,22 @@ const AboutPage = () => {
                 year: '2023 - Present',
                 title: 'Senior Full Stack Developer',
                 company: 'Tech Innovations Inc.',
-                description: 'Leading development of enterprise web applications using React and Node.js.',
+                description:
+                  'Leading development of enterprise web applications using React and Node.js.',
               },
               {
                 year: '2021 - 2023',
                 title: 'Full Stack Developer',
                 company: 'Digital Solutions Ltd.',
-                description: 'Built and maintained multiple client projects using modern web technologies.',
+                description:
+                  'Built and maintained multiple client projects using modern web technologies.',
               },
               {
                 year: '2019 - 2021',
                 title: 'Frontend Developer',
                 company: 'Creative Agency',
-                description: 'Focused on creating responsive and interactive user interfaces.',
+                description:
+                  'Focused on creating responsive and interactive user interfaces.',
               },
             ].map((exp, index) => (
               <motion.div
@@ -196,7 +203,7 @@ const AboutPage = () => {
         </motion.section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AboutPage
+export default AboutPage;
