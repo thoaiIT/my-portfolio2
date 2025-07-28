@@ -169,7 +169,7 @@
 
   /* Hide default cursor on desktop */
   @media (min-width: 768px) {
-    * {
+    * .portfolio-layout {
       cursor: none !important;
     }
   }

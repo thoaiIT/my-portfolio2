@@ -5,11 +5,9 @@ import CustomCursor from '@/components/CustomCursor';
 const PortfolioLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <div className="min-h-screen bg-black flex flex-col relative">
+      <div className="min-h-screen bg-black flex flex-col relative portfolio-layout">
         <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </div>
       <CustomCursor />
